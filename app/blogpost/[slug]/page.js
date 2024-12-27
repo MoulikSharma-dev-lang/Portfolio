@@ -3,10 +3,12 @@ import matter from 'gray-matter';
 import { notFound } from 'next/navigation';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
+import path from 'path';
 
 export default async function BlogPost({ params }) {
     const blogSlug = (await params).slug
-    const exists = fs.existsSync(`app/blogposts/${blogSlug}.md`)
+    const filePath = path.join(process.cwd(), "app", "blogposts", `${blogSlug}.md`)
+    const exists = fs.existsSync(filePath)
 
     // Check if the blog exists
     if (!exists) {
